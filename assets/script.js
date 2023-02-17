@@ -40,17 +40,23 @@ function bulletCounter() {
 	//  Création des bullets fulls + Implantation des bullets fulls dans l'index HTML.
 	// ______________________________________________________________
 	const divDots = document.querySelector(".dots");
-	for (i = 0; i != imageAtTheMoment; i++) {
-		bulletElement = document.createElement("i");
-		bulletElement.className = "dot dot_selected"; // Pour "full bullet".
-		divDots.appendChild(bulletElement);
-	}
-	for (o = 0; o != bulletEmpty; o++) {
+
+	for (i = 0; i != bulletNumberMax; i++) {
+		switch (i) {
+		case (imageAtTheMoment-1) :
+			bulletElement = document.createElement("i");
+			bulletElement.className = "dot dot_selected"; // Pour "full bullet".
+			divDots.appendChild(bulletElement);
+			break;
+
+		default : 
 		bulletElement = document.createElement("i");
 		bulletElement.className = "dot"; // Pour "empty bullet".
 		divDots.appendChild(bulletElement);
+		break;
+		}
 	}
-}
+}	
 
 // ______________________________________________________________
 // Il faut bien clear le tout (je note avoir du modifier le HTML car je n'ai su récupérer la balise <dots> nestée dans l'ID banner).
@@ -71,12 +77,11 @@ function clearBullet() {
 // ______________________________________________________________
 function imageModification() {
 	let bannerImage = document.getElementsByClassName("banner-img").item(0);
-	let bannerImageSource = bannerImage.getAttribute("src");
 	bannerImage.setAttribute("src", "./assets/images/slideshow/" + slides[imageAtTheMoment-1].image);
 }
 
 function textModification() {
-	let bannerText = document.querySelector(".banner-content");
+	bannerText = document.querySelector(".banner-content");
 	let bannerTextNew = bannerText.querySelector("p");
 	bannerTextNew.innerHTML = slides[imageAtTheMoment-1].tagLine;
 }
@@ -101,15 +106,14 @@ let rightElement = document.querySelector('.arrow_right');
 leftElement.addEventListener('click', () => {
 	switch (imageAtTheMoment) {
 		case 1:
-			clearBullet();
 			imageAtTheMoment = bulletNumberMax;
 			break;
 
 		default:
-			clearBullet();
 			imageAtTheMoment--;
 	}
 	bulletEmpty = bulletNumberMax - imageAtTheMoment;
+	clearBullet();
 	bulletCounter();
 	imageModification();
 	textModification();
@@ -118,15 +122,14 @@ leftElement.addEventListener('click', () => {
 rightElement.addEventListener('click', () => {
 	switch (imageAtTheMoment) {
 		case bulletNumberMax:
-			clearBullet();
 			imageAtTheMoment = 1;
 			break;
 
 		default:
-			clearBullet();
 			imageAtTheMoment++;
 	}
 	bulletEmpty = bulletNumberMax - imageAtTheMoment;
+	clearBullet();
 	bulletCounter();
 	imageModification();
 	textModification();
