@@ -102,34 +102,30 @@ let leftElement = document.querySelector('.arrow_left');
 let rightElement = document.querySelector('.arrow_right');
 
 leftElement.addEventListener('click', () => {
+	clearBullet();
 	switch (imageAtTheMoment) {
 		case 1:
-			clearBullet();
 			imageAtTheMoment = bulletNumberMax;
 			break;
 
 		default:
-			clearBullet();
 			imageAtTheMoment--;
 	}
-	bulletEmpty = bulletNumberMax - imageAtTheMoment;
 	bulletCounter();
 	imageModification();
 	textModification();
 })
 
 rightElement.addEventListener('click', () => {
+	clearBullet();
 	switch (imageAtTheMoment) {
 		case bulletNumberMax:
-			clearBullet();
 			imageAtTheMoment = 1;
 			break;
 
 		default:
-			clearBullet();
 			imageAtTheMoment++;
 	}
-	bulletEmpty = bulletNumberMax - imageAtTheMoment;
 	bulletCounter();
 	imageModification();
 	textModification();
