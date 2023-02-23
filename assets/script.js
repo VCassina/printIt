@@ -28,7 +28,6 @@ let imageAtTheMoment = 1;
 // ______________________________________________________________
 // DEBUT DE L'ARC DES BULLETS !!
 // ______________________________________________________________
-const bulletNumberMax = slides.length;
 let bulletElement;
 
 // ______________________________________________________________
@@ -40,7 +39,7 @@ function bulletCounter() {
 	// ______________________________________________________________
 	const divDots = document.querySelector(".dots");
 
-	for (i = 0; i != bulletNumberMax; i++) {
+	for (i = 0; i != slides.length; i++) {
         switch (i) {
             case imageAtTheMoment-1 :
                 bulletElement = document.createElement("i");
@@ -104,7 +103,7 @@ leftElement.addEventListener('click', () => {
 	clearBullet();
 	switch (imageAtTheMoment) {
 		case 1:
-			imageAtTheMoment = bulletNumberMax;
+			imageAtTheMoment = slides.length;
 			break;
 
 		default:
@@ -118,7 +117,7 @@ leftElement.addEventListener('click', () => {
 rightElement.addEventListener('click', () => {
 	clearBullet();
 	switch (imageAtTheMoment) {
-		case bulletNumberMax:
+		case slides.length:
 			imageAtTheMoment = 1;
 			break;
 
