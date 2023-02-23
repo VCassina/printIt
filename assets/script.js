@@ -29,7 +29,6 @@ let imageAtTheMoment = 1;
 // DEBUT DE L'ARC DES BULLETS !!
 // ______________________________________________________________
 const bulletNumberMax = slides.length;
-bulletEmpty = bulletNumberMax - imageAtTheMoment;
 let bulletElement;
 
 // ______________________________________________________________
