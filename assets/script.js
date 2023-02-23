@@ -28,7 +28,6 @@ let imageAtTheMoment = 1;
 // ______________________________________________________________
 // DEBUT DE L'ARC DES BULLETS !!
 // ______________________________________________________________
-
 const bulletNumberMax = slides.length;
 bulletEmpty = bulletNumberMax - imageAtTheMoment;
 let bulletElement;
@@ -37,22 +36,23 @@ let bulletElement;
 // La fonction qui permet de savoir où nous en sommes avec les bullets.
 // ______________________________________________________________
 function bulletCounter() {
-	console.log("Nous en sommes à l'image numéro " + imageAtTheMoment + ".");
-	console.log("Ce qui vouloir dire que " + imageAtTheMoment + " bille(s) pleine(s) et " + bulletEmpty + " bille(s) vide(s).");
-
 	// ______________________________________________________________
 	//  Création des bullets fulls + Implantation des bullets fulls dans l'index HTML.
 	// ______________________________________________________________
 	const divDots = document.querySelector(".dots");
-	for (i = 0; i != imageAtTheMoment; i++) {
-		bulletElement = document.createElement("i");
-		bulletElement.className = "dot dot_selected"; // Pour "full bullet".
-		divDots.appendChild(bulletElement);
-	}
-	for (o = 0; o != bulletEmpty; o++) {
-		bulletElement = document.createElement("i");
-		bulletElement.className = "dot"; // Pour "empty bullet".
-		divDots.appendChild(bulletElement);
+
+	for (i = 0; i != bulletNumberMax; i++) {
+        switch (i) {
+            case imageAtTheMoment-1 :
+                bulletElement = document.createElement("i");
+                bulletElement.className = "dot dot_selected"; // Pour "full bullet".
+                divDots.appendChild(bulletElement);
+                break;
+            default:
+	 	        bulletElement = document.createElement("i");
+	 	        bulletElement.className = "dot"; // Pour "empty bullet".
+	 	        divDots.appendChild(bulletElement);
+        }
 	}
 }
 
@@ -60,15 +60,10 @@ function bulletCounter() {
 // Il faut bien clear le tout (je note avoir du modifier le HTML car je n'ai su récupérer la balise <dots> nestée dans l'ID banner).
 // ______________________________________________________________
 function clearBullet() {
-	console.log("La function est bien appelée !");;
-
 	let element = document.getElementById("dots");
-	console.log("Elle tente de selectionner les balises DOTS !");
-
 	while (element.firstChild) {
 		element.removeChild(element.firstChild);
 	}
-	console.log("Execution complète de la function, est-ce que ça a fonctionné ?");
 }
 
 // ______________________________________________________________
@@ -76,8 +71,18 @@ function clearBullet() {
 // ______________________________________________________________
 
 // ______________________________________________________________
-// DEBUT DE L'ARC DES IMAGES/TEXTES !!
+// DEBUT DE L'ARC DES IMAGES/TEXTS !!
 // ______________________________________________________________
+function imageModification() {
+	let bannerImage = document.getElementsByClassName("banner-img").item(0);
+	bannerImage.setAttribute("src", "./assets/images/slideshow/" + slides[imageAtTheMoment-1].image);
+}
+
+function textModification() {
+	bannerText = document.querySelector(".banner-content");
+	let bannerTextNew = bannerText.querySelector("p");
+	bannerTextNew.innerHTML = slides[imageAtTheMoment-1].tagLine;
+}
 
 // ______________________________________________________________
 // FIN DE L'ARC DES IMAGES/TEXTES.
@@ -88,7 +93,6 @@ function clearBullet() {
 // ______________________________________________________________
 window.onload = (event) => {
 	bulletCounter();
-	console.log('La page à chargé complétement et donc bulletCounter a été appelée.');
 };
 
 // ______________________________________________________________
@@ -98,25 +102,23 @@ let leftElement = document.querySelector('.arrow_left');
 let rightElement = document.querySelector('.arrow_right');
 
 leftElement.addEventListener('click', () => {
-	console.log('Ceci est un click sur la flèche de gauche.');
 	switch (imageAtTheMoment) {
 		case 1:
 			clearBullet();
 			imageAtTheMoment = bulletNumberMax;
-			console.log('.');
 			break;
 
 		default:
 			clearBullet();
 			imageAtTheMoment--;
-			console.log("On est désormais à l'image " + imageAtTheMoment + ".");
 	}
 	bulletEmpty = bulletNumberMax - imageAtTheMoment;
 	bulletCounter();
+	imageModification();
+	textModification();
 })
 
 rightElement.addEventListener('click', () => {
-	console.log('Ceci est un click sur la flèche de droite.');
 	switch (imageAtTheMoment) {
 		case bulletNumberMax:
 			clearBullet();
@@ -126,10 +128,11 @@ rightElement.addEventListener('click', () => {
 		default:
 			clearBullet();
 			imageAtTheMoment++;
-			console.log("On est désormais à l'image " + imageAtTheMoment + ".");
 	}
 	bulletEmpty = bulletNumberMax - imageAtTheMoment;
 	bulletCounter();
+	imageModification();
+	textModification();
 })
 
 // ______________________________________________________________
@@ -139,5 +142,4 @@ rightElement.addEventListener('click', () => {
 // ______________________________________________________________
 // Être sur que le script s'est correctement executé, sans erreur du moins, jusqu'au bout.
 // ______________________________________________________________
-console.log("Le script semble s'être bien éxecuté à l'ouverture !");
-console.log("Ecrit par Victor CASSINA, je le JURE !");
+console.log("The script goes well !");
