@@ -77,7 +77,7 @@ function imageModification() {
 }
 
 function textModification() {
-	bannerText = document.querySelector(".banner-content");
+	let bannerText = document.querySelector(".banner-content");
 	let bannerTextNew = bannerText.querySelector("p");
 	bannerTextNew.innerHTML = slides[imageAtTheMoment-1].tagLine;
 }
