@@ -1,1 +1,3 @@
-# Print-It WebSite v.1
+// Print-It !
+
+Premier projet JS réalisé dans le cadre de la formation intégrateur WEB.
